@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>apng-js example</title>
+  <script src="../dist/bundle.js"></script>
+  <script>
+    APNG.parseByUrl('./bouncing_beach_ball.png').then(() => {
+      console.log('done');
+    });
+  </script>
+</head>
+<body>
+  <p>
+    <img src="./bouncing_beach_ball.png" alt="">
+  </p>
+</body>
+</html>

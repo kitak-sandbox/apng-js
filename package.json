@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "browserify src/index.js -t babelify -o dist/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/kitak-sandbox/apng-js/issues"
   },
-  "homepage": "https://github.com/kitak-sandbox/apng-js#readme"
+  "homepage": "https://github.com/kitak-sandbox/apng-js#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.9.1"
+  }
 }
