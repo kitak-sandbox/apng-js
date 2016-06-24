@@ -23,8 +23,8 @@ var parseByUrl = function parseByUrl(url) {
 
 var parseAPNG = function parseAPNG(buffer) {
   var bytes = new Uint8Array(buffer);
-  console.log(bytes);
   var PNG_SIGNATURE = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+  var cursor = 0;
 
   return new Promise(function (resolve, reject) {
     for (var i = 0; i < PNG_SIGNATURE.length; i++) {
@@ -33,8 +33,32 @@ var parseAPNG = function parseAPNG(buffer) {
         return;
       }
     }
+    cursor += 8;
+
+    var chunkLength = read4bytes(bytes);
+    cursor += 4;
+
+    var charCodes = [0, 1, 2, 3].map(function (i) {
+      return bytes[cursor + i];
+    });
+    cursor += 4;
+    var chunkType = String.fromCharCode.apply(null, charCodes);
+    console.log(chunkType);
+
+    //switch (chunkType) {
+    //case 'IHDR':
+
+    //}
+
     resolve();
   });
+};
+
+var read4bytes = function read4bytes(bytes, offset) {
+  return (bytes[offset] << 24 | bytes[offset + 1] << 16 | bytes[offset + 2] << 8 | bytes[offset + 3]) >>> 0;
+};
+var readByte = function readByte(bytes, offset) {
+  return bytes[offset] >>> 0;
 };
 
 window.APNG = {
